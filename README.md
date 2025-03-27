@@ -68,7 +68,16 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
    ```sh
    pip install watchdog
    ```
-3. Run the script:
+
+3. Change the path to the `Downloads` folder in the script:
+   ```python
+   # monitor.py
+   DOWNLOADS_PATH = "/path/to/Downloads"
+   ```
+   Replace `/path/to/Downloads` with the actual path to the `Downloads` folder.
+
+
+4. Run the script:
    ```sh
    python monitor.py
    ```
