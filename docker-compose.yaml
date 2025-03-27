@@ -1,0 +1,8 @@
+services:
+  ppt-watcher:
+    image: auto-ppt-to-pdf
+    container_name: auto-ppt-to-pdf
+    volumes:
+      - ~/Downloads:/mnt/downloads
+    privileged: true
+    restart: unless-stopped
