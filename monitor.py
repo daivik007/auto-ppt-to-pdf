@@ -6,11 +6,6 @@ from watchdog.events import FileSystemEventHandler
 
 DOWNLOADS_FOLDER = "/mnt/downloads"
 
-def is_file_stable(file_path, wait_time=5):
-    """Check if file is stable (not being modified)"""
-    initial_size = os.path.getsize(file_path)
-    time.sleep(wait_time)
-    return initial_size == os.path.getsize(file_path)
 
 class PPTHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -21,10 +16,8 @@ class PPTHandler(FileSystemEventHandler):
             print(f"New file detected: {event.src_path}")
             time.sleep(5)  # Give it some time to complete download
             if os.path.exists(event.src_path) and os.path.getsize(event.src_path) > 0:
-                if is_file_stable(event.src_path):
-                    self.convert_to_pdf(event.src_path)
-                else:
-                    print(f"Skipping: {event.src_path} (File may still be downloading)")
+                self.convert_to_pdf(event.src_path)
+                
             else:
                 print(f"Skipping: {event.src_path} (File may not be fully downloaded)")
 
