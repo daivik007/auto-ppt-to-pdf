@@ -14,7 +14,6 @@ class PPTHandler(FileSystemEventHandler):
             return
         if event.src_path.endswith(('.ppt', '.pptx')):
             print(f"New file detected: {event.src_path}")
-            time.sleep(5)  # Give it some time to complete download
             if os.path.exists(event.src_path) and os.path.getsize(event.src_path) > 0:
                 self.convert_to_pdf(event.src_path)
                 
