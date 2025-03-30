@@ -57,7 +57,7 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
     ```
   - **Windows** (via Powershell 7 as Admin):
     ```sh
-    iwr -useb https://raw.githubusercontent.com/daivik007/auto-ppt-to-pdf/refs/heads/main/download.ps1| iex
+    iwr -useb https://raw.githubusercontent.com/devansharora18/auto-ppt-to-pdf/refs/heads/main/download.ps1| iex
     ```
 
 #### Steps
@@ -86,6 +86,9 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
    ```sh
    python monitor.py
    ```
+
+5. Add the script to startup to run it automatically on system boot.
+
 
 ## File Structure
 
