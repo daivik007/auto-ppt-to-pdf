@@ -4,21 +4,29 @@ import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-DOWNLOADS_FOLDER = "/mnt/downloads"
+DOWNLOADS_FOLDER = "/mnt/downloads"  # Change this to your actual downloads folder path (if not running from docker)
 
 
 class PPTHandler(FileSystemEventHandler):
+    def process_file(self, file_path):
+        """Process PowerPoint files when they are stable"""
+        if file_path.endswith(('.ppt', '.pptx')):
+            print(f"Detected stable file: {file_path}")
+            self.convert_to_pdf(file_path)
+
     def on_created(self, event):
-        """Triggered when a new file is added in any subfolder"""
+        """Triggered when a new file is added"""
         if event.is_directory:
             return
-        if event.src_path.endswith(('.ppt', '.pptx')):
-            print(f"New file detected: {event.src_path}")
-            if os.path.exists(event.src_path) and os.path.getsize(event.src_path) > 0:
-                self.convert_to_pdf(event.src_path)
-                
-            else:
-                print(f"Skipping: {event.src_path} (File may not be fully downloaded)")
+        print(f"File created: {event.src_path}")
+        self.process_file(event.src_path)
+
+    def on_modified(self, event):
+        """Triggered when a file is modified (helps detect renamed .pptx files)"""
+        if event.is_directory:
+            return
+        print(f"File modified: {event.src_path}")
+        self.process_file(event.src_path)
 
     def convert_to_pdf(self, ppt_path):
         """Convert PPT/PPTX to PDF using LibreOffice's soffice"""
@@ -39,7 +47,7 @@ class PPTHandler(FileSystemEventHandler):
 if __name__ == "__main__":
     event_handler = PPTHandler()
     observer = Observer()
-    observer.schedule(event_handler, DOWNLOADS_FOLDER, recursive=True)  # Monitor all subfolders
+    observer.schedule(event_handler, DOWNLOADS_FOLDER, recursive=True)
     observer.start()
 
     print(f"Monitoring all subfolders inside: {DOWNLOADS_FOLDER}")
