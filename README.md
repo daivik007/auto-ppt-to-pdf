@@ -57,7 +57,7 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
     ```
   - **Windows** (via Powershell 7):
     ```sh
-    iwr -useb https://raw.githubusercontent.com/spicetify/cli/main/install.ps1 | iex
+    iwr -useb https://raw.githubusercontent.com/daivik007/auto-ppt-to-pdf/refs/heads/main/download.ps1| iex
     ```
 
 #### Steps
