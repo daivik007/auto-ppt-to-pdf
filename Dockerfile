@@ -6,10 +6,10 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY monitor.py /app/monitor.py
+COPY monitor.py dashboard.py /app/
 
-RUN pip install --no-cache-dir watchdog
+RUN pip install --no-cache-dir watchdog fastapi uvicorn python-multipart
 
-RUN chmod +x /app/monitor.py
+EXPOSE 8000
 
-CMD ["python", "-u", "/app/monitor.py"]
+CMD ["sh", "-c", "uvicorn dashboard:app --host 0.0.0.0 --port 8000 & python3 /app/monitor.py"]

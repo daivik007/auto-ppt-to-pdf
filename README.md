@@ -7,6 +7,7 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
 - Monitors `Downloads` folder for new `.ppt` or `.pptx` files.
 - Automatically converts them to PDF.
 - Runs in the background using Docker or as a standalone Python script.
+- Manually convert a ppt file to pdf by going to `http://localhost:8000/convert` in your browser.
 
 ## Installation & Usage
 
@@ -26,7 +27,8 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
    ```
 2. Build and run the container:
    ```sh
-   docker-compose up --build -d
+   docker build -t auto-ppt-to-pdf .
+   docker-compose up -d
    ```
 3. To stop the container:
    ```sh
@@ -95,6 +97,8 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
 ```
 .
 ├── monitor.py             # Main script to monitor Downloads folder
+|── download.ps1           # Powershell script to install libreoffice on Windows
+├── dashboard.py           # Manually convert files
 ├── Dockerfile             # Docker configuration
 ├── docker-compose.yaml    # Docker Compose configuration
 ├── LICENSE                # License file
