@@ -55,7 +55,7 @@ This project automatically converts newly downloaded PowerPoint files (`.ppt`/`.
     ```sh
     brew install --cask libreoffice
     ```
-  - **Windows** (via Powershell 7):
+  - **Windows** (via Powershell 7 as Admin):
     ```sh
     iwr -useb https://raw.githubusercontent.com/daivik007/auto-ppt-to-pdf/refs/heads/main/download.ps1| iex
     ```
